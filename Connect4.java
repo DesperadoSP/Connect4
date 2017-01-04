@@ -35,22 +35,38 @@ public class Connect4 extends JFrame implements ActionListener{
     }
 	turnLabel = new JLabel("Player Turn");
 	pane.add(turnLabel);
-	turnCount = new JTextField(turn);
+	turnCount = new JTextField(""+turn+"");
 	pane.add(turnCount);
     }
 
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
         if(event.equals("1")){
-	    if (
+	    addChip(0);
+		}
+	else if(event.equals("2")){
+	    addChip(1);
+	}else if (event.equals("3")){
+	    addChip(2);
+	}else if (event.equals("4")){
+	    addChip(3);
+	}else if (event.equals("5")){
+	    addChip(4);
+	}else if (event.equals("6")){
+	    addChip(5);
+	}else if (event.equals("7")){
+	    addChip(6);
+	}
+    }
 
 
-		}}}
+
+		
 
     public int getRow(int co){
 	int r0w = -1;
         for (int r = 0; r < 6; r++){
-	    if (ary[r][col].getBackground() == null;){
+	    if (ary[r][co].getBackground() == null){
 		r0w = r;
 		break;
 	    }
@@ -62,14 +78,14 @@ public class Connect4 extends JFrame implements ActionListener{
     
 public void addChip(int col){
     if (getRow(col) != -1){
-	if (turn = 1){
-	    this.ary[getRow(col)][col].setBackground(Color.blue)
+	if (turn == 1){
+	    this.ary[getRow(col)][col].setBackground(Color.blue);
 		turn = 2;}
 	else{
-            this.ary[getRow(col)][col].setBackground(Color.red)
+            this.ary[getRow(col)][col].setBackground(Color.red);
 		turn = 1;}
     }else{
-	JOptionPane.showMessageDialog(frame, "The column is full")
+	JOptionPane.showMessageDialog(null, "The column is full");
 	    }
 }
 
