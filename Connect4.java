@@ -10,7 +10,10 @@ public class Connect4 extends JFrame implements ActionListener{
     public int turn;
     private JTextField turnCount;
     private boolean win;
+    private int boardColumn, boardRow;
     public Connect4(){
+        boardRow = 10;
+	boardColumn = 10;
 	win = false;
 	turn = 1;
         this.setTitle("Connect4");
@@ -18,17 +21,17 @@ public class Connect4 extends JFrame implements ActionListener{
         this.setLocation(100, 100);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	pane = this.getContentPane();
-	pane.setLayout(new GridLayout(8, 6));
-        a = new JButton[7];
-	for (int i = 0; i < 7; i++){
+	pane.setLayout(new GridLayout(boardRow + 2, boardColumn - 1));
+        a = new JButton[boardColumn];
+	for (int i = 0; i < boardColumn; i++){
 	    a[i] = new JButton(""+(i + 1)+"");
             a[i].addActionListener(this);
             a[i].setActionCommand(""+(i + 1)+"");
 	    pane.add(a[i]);
 	}
-        ary = new JLabel[6][7];
-	for (int r = 0; r < 6; r++){
-	    for (int c = 0; c < 7; c++){
+        ary = new JLabel[boardRow][boardColumn];
+	for (int r = 0; r < boardRow; r++){
+	    for (int c = 0; c < boardColumn; c++){
 		ary[r][c] = new JLabel();
 		ary[r][c].setOpaque(true);
 		ary[r][c].setHorizontalAlignment(SwingConstants.CENTER);
@@ -37,7 +40,7 @@ public class Connect4 extends JFrame implements ActionListener{
 		pane.add(ary[r][c]);
 	    }  
     }
-	turnLabel = new JLabel("Player Turn");
+	turnLabel = new JLabel("Turn");
 	pane.add(turnLabel);
 	turnCount = new JTextField(""+turn+"");
 	pane.add(turnCount);
@@ -69,7 +72,7 @@ public class Connect4 extends JFrame implements ActionListener{
 
     public int getRow(int co){
 	int r0w = -1;
-        for (int r = 5; r >= 0; r--){
+        for (int r = boardRow - 1; r >= 0; r--){
 	    if (ary[r][co].getBackground() == Color.white){
 		r0w = r;
 		break;
@@ -79,8 +82,8 @@ public class Connect4 extends JFrame implements ActionListener{
     }
 
     public void clearBoard(){
-	for (int r = 0; r < 6; r++){
-	    for (int c = 0; c < 7; c++){
+	for (int r = 0; r < boardRow; r++){
+	    for (int c = 0; c < boardColumn; c++){
 		ary[r][c].setBackground(Color.white);
 	    }
 	}
@@ -152,8 +155,8 @@ public void addChip(int col){
 
     public Color winCheck(){
 	Color karma = Color.black;
-	for (int r = 0; r < 6; r++){
-	    for (int c = 0; c < 4; c++){
+	for (int r = 0; r < boardRow; r++){
+	    for (int c = 0; c < boardColumn - 3; c++){
 		if(ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
 		    if ((ary[r][c + 1].getBackground() == karma) && (ary[r][c+2].getBackground() == karma) && (ary[r][c+3].getBackground() == karma)){
@@ -163,8 +166,8 @@ public void addChip(int col){
 		}
 	    }
 	}
-	for (int r = 0; r < 3; r++){
-	    for (int c = 0; c < 7; c++){
+	for (int r = 0; r < boardRow - 3; r++){
+	    for (int c = 0; c < boardColumn; c++){
 		if (ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
 		    if ((ary[r + 1][c].getBackground() == karma) && (ary[r+2][c].getBackground() == karma) && (ary[r+3][c].getBackground() == karma)){
@@ -174,8 +177,8 @@ public void addChip(int col){
 		}
 	    }
 	}
-	for (int r = 0; r < 3; r++){
-	    for (int c = 0; c < 4; c++){
+	for (int r = 0; r < boardRow - 3; r++){
+	    for (int c = 0; c < boardColumn - 3; c++){
 		if (ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
 		    if ((ary[r+1][c+1].getBackground() == karma) && (ary[r+2][c+2].getBackground() == karma) && (ary[r+3][c+3].getBackground() == karma)){
@@ -185,8 +188,8 @@ public void addChip(int col){
 		}
 	    }
 	}
-	for (int r = 3; r < 6; r++){
-	    for (int c = 0; c < 4; c++){
+	for (int r = 3; r < boardRow; r++){
+	    for (int c = 0; c < boardColumn - 3; c++){
 		if (ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
 		    if ((ary[r-1][c+1].getBackground() == karma) && (ary[r-2][c+2].getBackground() == karma) && (ary[r-3][c+3].getBackground() == karma)){
@@ -201,8 +204,8 @@ public void addChip(int col){
 			
     public boolean drawCheck(){
 	boolean hi = true;
-	for (int r = 0; r < 6; r++){
-	    for (int c = 0; c < 7; c++){
+	for (int r = 0; r < boardRow; r++){
+	    for (int c = 0; c < boardColumn; c++){
 		if (ary[r][c].getBackground() == Color.white){
 		    hi = false;
 		}
