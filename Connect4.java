@@ -78,9 +78,16 @@ public class Connect4 extends JFrame implements ActionListener{
 	return r0w;
     }
 
-
+    public void clearBoard(){
+	for (int r = 0; r < 6; r++){
+	    for (int c = 0; c < 7; c++){
+		ary[r][c].setBackground(Color.white);
+	    }
+	}
+    }
     
 public void addChip(int col){
+    Object[] newgame = {"New Game", "OK"};
     if (getRow(col) != -1){
 	if (turn == 1){
 	    ary[getRow(col)][col].setBackground(Color.blue);
@@ -89,13 +96,26 @@ public void addChip(int col){
 	    winCheck();
 	    if (win == true){
 		if (winCheck() == Color.blue){
-		    JOptionPane.showMessageDialog(null, "Player 1 (Blue) has won! Please close and restart for a new game >:c");
+		    int result = JOptionPane.showOptionDialog(null, "Player 1 (Blue) has won!", "Winner!", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, newgame, null);
+		if (result == JOptionPane.YES_OPTION){
+		    clearBoard();
+		    turn = 1;
+                    turnCount.setText(""+turn+"");
+		    win = false;
+		}
 		}
 	        
 		
 	    }
 	    if (drawCheck()){
-		JOptionPane.showMessageDialog(null, "Draw! Please close and restart for a new game >:c");
+		int result = JOptionPane.showOptionDialog(null, "Draw game!", "Draw", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, newgame, null);
+		if (result == JOptionPane.YES_OPTION){
+		    clearBoard();
+		    turn = 1;
+                     turnCount.setText(""+turn+"");
+		    win = false;
+		}
+
 	    }
 	}
 	
@@ -106,10 +126,23 @@ public void addChip(int col){
 		winCheck();
 		if (win == true){
 		    if (winCheck() == Color.red){
-			JOptionPane.showMessageDialog(null, "Player 2 (Red) has won! Please close and restart for a new game >:c");
+                        int result = JOptionPane.showOptionDialog(null, "Player 2 (Red) has won!", "Winner", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, newgame, null);
+		if (result == JOptionPane.YES_OPTION){
+		    clearBoard();
+		    turn = 1;
+                    turnCount.setText(""+turn+"");
+		    win = false;
+		}
+			
 		    }}
 		if (drawCheck()){
-		JOptionPane.showMessageDialog(null, "Draw! Please close and restart for a new game >:c");
+        int result = JOptionPane.showOptionDialog(null, "Draw game!", "Draw", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, newgame, null);
+		if (result == JOptionPane.YES_OPTION){
+		    clearBoard();
+		    turn = 1;
+                    turnCount.setText(""+turn+"");
+		    win = false;
+		}
 	    }
 	}
     }else{
