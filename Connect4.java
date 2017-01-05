@@ -9,7 +9,9 @@ public class Connect4 extends JFrame implements ActionListener{
     private JLabel turnLabel;
     public int turn;
     private JTextField turnCount;
+    private boolean win;
     public Connect4(){
+	win = false;
 	turn = 1;
         this.setTitle("Connect4");
         this.setSize(600, 400);
@@ -83,21 +85,98 @@ public void addChip(int col){
 	if (turn == 1){
 	    ary[getRow(col)][col].setBackground(Color.blue);
 	    turn = 2;
-	    turnCount.setText(""+turn+"");}
+	    turnCount.setText(""+turn+"");
+	    winCheck();
+	    if (win == true){
+		if (winCheck() == Color.blue){
+		    JOptionPane.showMessageDialog(null, "Player 1 (Blue) has won! Please close and restart for a new game >:c");
+		}
+	        
+		
+	    }
+	    if (drawCheck()){
+		JOptionPane.showMessageDialog(null, "Draw! Please close and restart for a new game >:c");
+	    }
+	}
+	
 	else{
             ary[getRow(col)][col].setBackground(Color.red);
 		turn = 1;
-		turnCount.setText(""+turn+"");}
+		turnCount.setText(""+turn+"");
+		winCheck();
+		if (win == true){
+		    if (winCheck() == Color.red){
+			JOptionPane.showMessageDialog(null, "Player 2 (Red) has won! Please close and restart for a new game >:c");
+		    }}
+		if (drawCheck()){
+		JOptionPane.showMessageDialog(null, "Draw! Please close and restart for a new game >:c");
+	    }
+	}
     }else{
 	JOptionPane.showMessageDialog(null, "The column is full! Please pick another one.");
 	    }
 }
 
-    public boolean winCheck(){
-	boolean zel;
+    public Color winCheck(){
+	Color karma = Color.black;
+	for (int r = 0; r < 6; r++){
+	    for (int c = 0; c < 4; c++){
+		if(ary[r][c].getBackground() != Color.white){
+		    karma = ary[r][c].getBackground();
+		    if ((ary[r][c + 1].getBackground() == karma) && (ary[r][c+2].getBackground() == karma) && (ary[r][c+3].getBackground() == karma)){
+			win = true;
+			return karma;
+		    }
+		}
+	    }
+	}
+	for (int r = 0; r < 3; r++){
+	    for (int c = 0; c < 7; c++){
+		if (ary[r][c].getBackground() != Color.white){
+		    karma = ary[r][c].getBackground();
+		    if ((ary[r + 1][c].getBackground() == karma) && (ary[r+2][c].getBackground() == karma) && (ary[r+3][c].getBackground() == karma)){
+			win = true;
+			return karma;
+		    }
+		}
+	    }
+	}
+	for (int r = 0; r < 3; r++){
+	    for (int c = 0; c < 4; c++){
+		if (ary[r][c].getBackground() != Color.white){
+		    karma = ary[r][c].getBackground();
+		    if ((ary[r+1][c+1].getBackground() == karma) && (ary[r+2][c+2].getBackground() == karma) && (ary[r+3][c+3].getBackground() == karma)){
+			win = true;
+			return karma;
+		    }
+		}
+	    }
+	}
+	for (int r = 3; r < 6; r++){
+	    for (int c = 0; c < 4; c++){
+		if (ary[r][c].getBackground() != Color.white){
+		    karma = ary[r][c].getBackground();
+		    if ((ary[r-1][c+1].getBackground() == karma) && (ary[r-2][c+2].getBackground() == karma) && (ary[r-3][c+3].getBackground() == karma)){
+			win = true;
+			return karma;
+		    }
+		}
+	    }
+	}
+	return karma;
+    }
+			
+    public boolean drawCheck(){
+	boolean hi = true;
 	for (int r = 0; r < 6; r++){
 	    for (int c = 0; c < 7; c++){
-		
+		if (ary[r][c].getBackground() == Color.white){
+		    hi = false;
+		}
+	    }
+	}
+	return hi;
+    }
 
 
 
