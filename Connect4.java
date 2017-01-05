@@ -28,8 +28,10 @@ public class Connect4 extends JFrame implements ActionListener{
 	for (int r = 0; r < 6; r++){
 	    for (int c = 0; c < 7; c++){
 		ary[r][c] = new JLabel();
+		ary[r][c].setOpaque(true);
 		ary[r][c].setHorizontalAlignment(SwingConstants.CENTER);
 		ary[r][c].setBorder(new LineBorder(Color.black));
+		ary[r][c].setBackground(Color.white);
 		pane.add(ary[r][c]);
 	    }  
     }
@@ -65,8 +67,8 @@ public class Connect4 extends JFrame implements ActionListener{
 
     public int getRow(int co){
 	int r0w = -1;
-        for (int r = 0; r < 6; r++){
-	    if (ary[r][co].getBackground() == null){
+        for (int r = 5; r >= 0; r--){
+	    if (ary[r][co].getBackground() == Color.white){
 		r0w = r;
 		break;
 	    }
@@ -79,22 +81,30 @@ public class Connect4 extends JFrame implements ActionListener{
 public void addChip(int col){
     if (getRow(col) != -1){
 	if (turn == 1){
-	    this.ary[getRow(col)][col].setBackground(Color.blue);
-		turn = 2;}
+	    ary[getRow(col)][col].setBackground(Color.blue);
+	    turn = 2;
+	    turnCount.setText(""+turn+"");}
 	else{
-            this.ary[getRow(col)][col].setBackground(Color.red);
-		turn = 1;}
+            ary[getRow(col)][col].setBackground(Color.red);
+		turn = 1;
+		turnCount.setText(""+turn+"");}
     }else{
-	JOptionPane.showMessageDialog(null, "The column is full");
+	JOptionPane.showMessageDialog(null, "The column is full! Please pick another one.");
 	    }
 }
+
+    public boolean winCheck(){
+	boolean zel;
+	for (int r = 0; r < 6; r++){
+	    for (int c = 0; c < 7; c++){
+		
 
 
 
      
     public static void main(String[]args){
 	Connect4 z = new Connect4();
-	z.setVisible(true);
+        z.setVisible(true);
     }
 
     
