@@ -10,8 +10,9 @@ public class Connect4 extends JFrame implements ActionListener{
     public int turn;
     private JTextField turnCount;
     private boolean win;
-    private int boardColumn, boardRow;
+    private int boardColumn, boardRow, winCount;
     public Connect4(){
+	winCount = 4;
         boardRow = 10;
 	boardColumn = 10;
 	win = false;
@@ -140,48 +141,75 @@ public void addChip(int col){
 }
 
     public Color winCheck(){
-	Color karma = Color.black;
+	boolean yesNo = true;
+	Color karma = Color.white;
 	for (int r = 0; r < boardRow; r++){
 	    for (int c = 0; c < boardColumn - 3; c++){
 		if(ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
-		    if ((ary[r][c + 1].getBackground() == karma) && (ary[r][c+2].getBackground() == karma) && (ary[r][c+3].getBackground() == karma)){
+		    for (int w = 1; w <winCount; w++){
+			if (ary[r][c + w].getBackground() != karma){
+			    yesNo = false;
+			}
+		    }
+		    if (yesNo){
 			win = true;
 			return karma;
 		    }
-		}
+		   
 	    }
 	}
+	}
+	yesNo = true;	
 	for (int r = 0; r < boardRow - 3; r++){
 	    for (int c = 0; c < boardColumn; c++){
 		if (ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
-		    if ((ary[r + 1][c].getBackground() == karma) && (ary[r+2][c].getBackground() == karma) && (ary[r+3][c].getBackground() == karma)){
+		    for (int f = 1; f < winCount; f++){
+			if ((ary[r+f][c].getBackground() != karma)){
+			    yesNo = false;
+			}
+		    }
+		    if (yesNo){
 			win = true;
 			return karma;
 		    }
+			
 		}
 	    }
 	}
+	yesNo = true;
 	for (int r = 0; r < boardRow - 3; r++){
 	    for (int c = 0; c < boardColumn - 3; c++){
 		if (ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
-		    if ((ary[r+1][c+1].getBackground() == karma) && (ary[r+2][c+2].getBackground() == karma) && (ary[r+3][c+3].getBackground() == karma)){
+		    for (int f = 1; f < winCount; f++){
+			if ((ary[r+f][c+f].getBackground() != karma)){
+			    yesNo = false;
+			}
+		    }
+		    if (yesNo){
 			win = true;
 			return karma;
 		    }
 		}
 	    }
 	}
+	yesNo = true;
 	for (int r = 3; r < boardRow; r++){
 	    for (int c = 0; c < boardColumn - 3; c++){
 		if (ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
-		    if ((ary[r-1][c+1].getBackground() == karma) && (ary[r-2][c+2].getBackground() == karma) && (ary[r-3][c+3].getBackground() == karma)){
+		    for (int f = 1; f <winCount; f++){
+			if ((ary[r-f][c+f].getBackground() != karma)){
+			    yesNo = false;
+			}
+		    }
+		    if (yesNo){
 			win = true;
 			return karma;
 		    }
+		
 		}
 	    }
 	}
