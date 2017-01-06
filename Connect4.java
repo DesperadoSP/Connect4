@@ -48,22 +48,8 @@ public class Connect4 extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
-        if(event.equals("1")){
-	    addChip(0);
-		}
-	else if(event.equals("2")){
-	    addChip(1);
-	}else if (event.equals("3")){
-	    addChip(2);
-	}else if (event.equals("4")){
-	    addChip(3);
-	}else if (event.equals("5")){
-	    addChip(4);
-	}else if (event.equals("6")){
-	    addChip(5);
-	}else if (event.equals("7")){
-	    addChip(6);
-	}
+        addChip(Integer.parseInt(event) - 1);
+
     }
 
 
