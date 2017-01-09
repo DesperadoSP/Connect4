@@ -7,7 +7,7 @@ public class Connect4 extends JFrame implements ActionListener{
     private JButton[] a;
     private JLabel[][] ary;
     private JLabel turnLabel;
-    public int turn;
+    public String turn;
     private JTextField turnCount;
     private boolean win;
     private int boardColumn, boardRow;
@@ -15,7 +15,7 @@ public class Connect4 extends JFrame implements ActionListener{
         boardRow = 8;
 	boardColumn = 5;
 	win = false;
-	turn = 1;
+	turn = "Blue";
         this.setTitle("Connect4");
         this.setSize(600, 400);
         this.setLocation(100, 100);
@@ -78,9 +78,9 @@ public class Connect4 extends JFrame implements ActionListener{
 public void addChip(int col){
     Object[] newgame = {"New Game", "OK"};
     if (getRow(col) != -1){
-	if (turn == 1){
+	if (turn.equals("Blue")){
 	    ary[getRow(col)][col].setBackground(Color.blue);
-	    turn = 2;
+	    turn = "Red";
 	    turnCount.setText(""+turn+"");
 	    winCheck();
 	    if (win == true){
@@ -88,7 +88,7 @@ public void addChip(int col){
 		    int result = JOptionPane.showOptionDialog(null, "Player 1 (Blue) has won!", "Winner!", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, newgame, null);
 		if (result == JOptionPane.YES_OPTION){
 		    clearBoard();
-		    turn = 1;
+		    turn = "Blue";
                     turnCount.setText(""+turn+"");
 		    win = false;
 		}
@@ -100,7 +100,7 @@ public void addChip(int col){
 		int result = JOptionPane.showOptionDialog(null, "Draw game!", "Draw", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, newgame, null);
 		if (result == JOptionPane.YES_OPTION){
 		    clearBoard();
-		    turn = 1;
+		    turn = "Blue";
                      turnCount.setText(""+turn+"");
 		    win = false;
 		}
@@ -110,7 +110,7 @@ public void addChip(int col){
 	
 	else{
             ary[getRow(col)][col].setBackground(Color.red);
-		turn = 1;
+		turn = "Blue";
 		turnCount.setText(""+turn+"");
 		winCheck();
 		if (win == true){
@@ -118,7 +118,7 @@ public void addChip(int col){
                         int result = JOptionPane.showOptionDialog(null, "Player 2 (Red) has won!", "Winner", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, newgame, null);
 		if (result == JOptionPane.YES_OPTION){
 		    clearBoard();
-		    turn = 1;
+		    turn = "Blue";
                     turnCount.setText(""+turn+"");
 		    win = false;
 		}
@@ -128,7 +128,7 @@ public void addChip(int col){
         int result = JOptionPane.showOptionDialog(null, "Draw game!", "Draw", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, newgame, null);
 		if (result == JOptionPane.YES_OPTION){
 		    clearBoard();
-		    turn = 1;
+		    turn = "Blue";
                     turnCount.setText(""+turn+"");
 		    win = false;
 		}
