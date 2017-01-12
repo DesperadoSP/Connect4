@@ -6,35 +6,11 @@ public class Connect4 extends JFrame implements ActionListener{
     private Container pane;
     private JButton[] a;
     private JLabel[][] ary;
-    private JLabel turnLabel, rowLabel, colLabel;
+    private JLabel turnLabel;
     public String turn;
-    private JTextField turnCount, rowCust, colCust;
-    private JButton initializer;
+    private JTextField turnCount;
     private boolean win;
-    private int boardColumn, boardRow;
-    public Connect4(){
-        this.setTitle("Connect4");
-	this.setSize(600,100);
-	this.setLocation(100,100);
-	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-	pane = this.getContentPane();
-	pane.setLayout(new FlowLayout());
-	rowCust = new JTextField(12);
-	colCust = new JTextField(12);
-	rowLabel = new JLabel("Rows");
-	colLabel = new JLabel("Columns");
-	initializer = new JButton("Initialize");
-	initializer.addActionListener(this);
-	initializer.setActionCommand("Initialize");
-	pane.add(rowLabel);
-	pane.add(rowCust);
-	pane.add(colLabel);
-	pane.add(colCust);
-	pane.add(initializer);
-    }
-
-
-	
+    private int boardColumn, boardRow, winNeed;	
     public Connect4(int x, int y){
         boardRow = x;
 	boardColumn = y;
@@ -72,18 +48,13 @@ public class Connect4 extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
-	if(e.equals("Initialize")){
-	    
+
         addChip(Integer.parseInt(event) - 1);
 
     }
-    }
+    
 
-    public void gridChange(Connect4 other){
-        try{
-	    other.boardRow = Integer.parseInt(rowCust.getText());
-	    other.boardColumn = Integer.parseInt(colCust.getText());
-	}
+   
 	
 					 
 	
@@ -236,14 +207,10 @@ public void addChip(int col){
 
 
 
-     
-    public static void main(String[]args){
-	Connect4 z = new Connect4();
-        z.setVisible(true);
-    }
+}
 
     
-}
+
 
 
 
