@@ -12,6 +12,7 @@ public class Connect4 extends JFrame implements ActionListener{
     private boolean win;
     private int boardColumn, boardRow, winNeed;	
     public Connect4(int x, int y){
+	winNeed = 4;
         boardRow = x;
 	boardColumn = y;
 	win = false;
@@ -147,44 +148,65 @@ public void addChip(int col){
     public Color winCheck(){
 	Color karma = Color.black;
 	for (int r = 0; r < boardRow; r++){
-	    for (int c = 0; c < boardColumn - 3; c++){
+	    for (int c = 0; c < boardColumn - (winNeed - 1); c++){
 		if(ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
-		    if ((ary[r][c + 1].getBackground() == karma) && (ary[r][c+2].getBackground() == karma) && (ary[r][c+3].getBackground() == karma)){
-			win = true;
+		    win = true;
+		    for (int w = 1; w < winNeed; w++){
+			if (ary[r][c + w].getBackground() != karma){
+			    win = false;
+		   }
+	          }
+		    if (win == true){
 			return karma;
 		    }
-		}
+	}
 	    }
 	}
-	for (int r = 0; r < boardRow - 3; r++){
+	for (int r = 0; r < boardRow - (winNeed - 1); r++){
 	    for (int c = 0; c < boardColumn; c++){
 		if (ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
-		    if ((ary[r + 1][c].getBackground() == karma) && (ary[r+2][c].getBackground() == karma) && (ary[r+3][c].getBackground() == karma)){
-			win = true;
+		    win = true;
+		    for (int w = 1; w < winNeed; w++){
+			if (ary[r + w][c].getBackground() != karma){
+			    win = false;
+			}
+		    }
+		    if (win == true){
 			return karma;
 		    }
 		}
 	    }
 	}
-	for (int r = 0; r < boardRow - 3; r++){
-	    for (int c = 0; c < boardColumn - 3; c++){
+	for (int r = 0; r < boardRow - (winNeed - 1); r++){
+	    for (int c = 0; c < boardColumn - (winNeed - 1); c++){
 		if (ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
-		    if ((ary[r+1][c+1].getBackground() == karma) && (ary[r+2][c+2].getBackground() == karma) && (ary[r+3][c+3].getBackground() == karma)){
-			win = true;
+		    win = true;
+		    for (int w = 1; w < winNeed; w++){
+			if (ary[r + w][c + w].getBackground() != karma){
+			    win = false;
+			}
+		    }
+		    if (win == true){
 			return karma;
 		    }
+		   
 		}
 	    }
 	}
-	for (int r = 3; r < boardRow; r++){
-	    for (int c = 0; c < boardColumn - 3; c++){
+	for (int r = (winNeed - 1); r < boardRow; r++){
+	    for (int c = 0; c < boardColumn - (winNeed - 1); c++){
 		if (ary[r][c].getBackground() != Color.white){
 		    karma = ary[r][c].getBackground();
-		    if ((ary[r-1][c+1].getBackground() == karma) && (ary[r-2][c+2].getBackground() == karma) && (ary[r-3][c+3].getBackground() == karma)){
-			win = true;
+		    win = true;
+		    for (int w = 1; w < winNeed; w++){
+			if (ary[r - w][c + w].getBackground() != karma){
+			    win = false;
+			}
+		    }
+		    if (win == true){
 			return karma;
 		    }
 		}
