@@ -22,8 +22,9 @@ public class Customization extends JFrame implements ActionListener{
 	colCount = new JTextField(12);
 	rowCount = new JTextField(12);
 	winCount = new JTextField(12);
+        
 	Initializer.addActionListener(this);
-	Initializer.setActionCommand("Initialize");
+	Initializer.setActionCommand("567");
 	pane.add(rowLabel);
 	pane.add(rowCount);
 	pane.add(colLabel);
@@ -36,13 +37,14 @@ public class Customization extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e){
 	String event = e.getActionCommand();
 	int r, c, w;
-        try{
+	if(event.equals("567")){
+        
 	    r = Integer.parseInt(rowCount.getText());
             c = Integer.parseInt(colCount.getText());
-            w = Integer.parseInt(winCount.getText());
-	}catch (NumberFormatException q){
-
-	}
+           
+	    derp = new Connect4(r, c);
+	    derp.setVisible(true);
+}
     }
 
     
