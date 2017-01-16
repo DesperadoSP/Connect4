@@ -11,15 +11,15 @@ public class Connect4 extends JFrame implements ActionListener{
     private JTextField turnCount;
     private boolean win;
     private int boardColumn, boardRow, winNeed;	
-    public Connect4(int x, int y){
-	winNeed = 4;
+    public Connect4(int x, int y, int z){
+	winNeed = z;
         boardRow = x;
 	boardColumn = y;
 	win = false;
 	turn = "Blue";
         this.setTitle("Connect4");
         this.setSize(600, 400);
-        this.setLocation(100, 100);
+        this.setLocation(100, 200);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	pane = this.getContentPane();
 	pane.setLayout(new GridLayout(boardRow + 2, boardColumn - 1));
